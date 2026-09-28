@@ -1,10 +1,20 @@
 package org.polytech.spring;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
+import org.polytech.spring.exceptions.FilmNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/films")
@@ -21,8 +31,41 @@ public class FilmController {
         return service.findAll();
     }
 
-    @GetMapping("/titre")
-    public List<FilmDto> findByTitre(String titre) {
-        return service.findByTitre(titre);
+    @PostMapping
+    public ResponseEntity<Void> create(@RequestBody FilmCreationDto film) {
+        
+        Long id = service.create(film); 
+
+        URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(id)
+            .toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping("/{id}")
+    public FilmDto findById(@PathVariable Long id) {
+        Optional<FilmDto> film = service.findById(id);
+        if (film.isEmpty()) {
+            throw new FilmNotFoundException();
+        }
+        return film.get();
+    }
+
+    @PutMapping("/{id}")
+    public FilmDto update(@PathVariable Long id, @RequestBody FilmCreationDto f) {
+        Optional<FilmDto> film = service.findById(id);
+        if (film.isEmpty()) {
+            throw new FilmNotFoundException();
+        }
+        service.update(id, f);
+        return service.findById(id).get();
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }

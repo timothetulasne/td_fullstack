@@ -1,7 +1,7 @@
 package org.polytech.spring.exceptions;
 
 public class CreationException extends RuntimeException {
-    public CreationException(String message) {
-        super(message);
+    public CreationException() {
+        super("données invalides ou incomplètes");
     }
 }

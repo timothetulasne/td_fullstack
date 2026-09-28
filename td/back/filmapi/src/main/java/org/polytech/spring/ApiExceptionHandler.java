@@ -5,7 +5,6 @@ import java.time.Instant;
 
 import org.polytech.spring.exceptions.CreationException;
 import org.polytech.spring.exceptions.FilmNotFoundException;
-import org.polytech.spring.exceptions.UpdateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,15 +18,6 @@ public class ApiExceptionHandler {
         ProblemDetail pb = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
         pb.setTitle("Création invalide");
         pb.setType(URI.create("/errors/creation"));
-        pb.setProperty("timestamp", Instant.now());
-        return pb;
-    }
-
-    @ExceptionHandler(UpdateException.class)
-    public ProblemDetail handleUpdate(UpdateException e) {
-        ProblemDetail pb = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
-        pb.setTitle("Mise à jour invalide");
-        pb.setType(URI.create("/errors/update"));
         pb.setProperty("timestamp", Instant.now());
         return pb;
     }
