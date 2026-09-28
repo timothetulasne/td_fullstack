@@ -1,8 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { FilmCard } from './film-card/film-card';
 
 @Component({
-  imports: [RouterOutlet],
+  imports: [FilmCard],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
