@@ -2,20 +2,35 @@ package org.polytech.spring;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 enum Genre {
     SCIENCE_FICTION, ACTION, THRILLER, ROMANCE, DRAME, COMEDIE
 }
 
-/**
- * Objet métier utilisé dans l'ensemble du cours.
- * Ce n'est pas encore une entité JPA : voir le chapitre « Java Persistence API ».
- */
+@Entity
+@Table(name="film")
 public class Film {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable=false, length=200)
     private String titre;
+    
+    @Column(nullable=false, length=80)
     private String realisateur;
+    
+    @Column(name="date_sortie",nullable=false)
     private LocalDate dateSortie;
+    
+    @Column(nullable=false)
     private Genre genre;
 
     public Film() {
