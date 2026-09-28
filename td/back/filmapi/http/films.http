@@ -31,7 +31,7 @@ Content-Type: application/json
 
 {
   "titre": "Blade Runner",
-  "realisateur": "Ridley Scott",
+  "realisateur": "Ridley Scotty",
   "dateSortie": "1982-06-25",
   "genre": "SCIENCE_FICTION"
 }
