@@ -3,6 +3,7 @@ package org.polytech.spring;
 import java.net.URI;
 import java.time.Instant;
 
+import org.polytech.spring.exceptions.ActeurNotFoundException;
 import org.polytech.spring.exceptions.CreationException;
 import org.polytech.spring.exceptions.FilmNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,15 @@ public class ApiExceptionHandler {
         ProblemDetail pb = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Requête invalide ou données manquantes");
         pb.setTitle("Données invalides");
         pb.setType(URI.create("/errors/bad-request"));
+        pb.setProperty("timestamp", Instant.now());
+        return pb;
+    }
+
+    @ExceptionHandler(ActeurNotFoundException.class)
+    public ProblemDetail handleActeurNotFound(ActeurNotFoundException e) {
+        ProblemDetail pb = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+        pb.setTitle("Acteur non trouvé");
+        pb.setType(URI.create("/errors/acteur-not-found"));
         pb.setProperty("timestamp", Instant.now());
         return pb;
     }

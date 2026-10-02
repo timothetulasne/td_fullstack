@@ -1,3 +1,5 @@
+### ================= FILMS =================
+
 ### Liste des films
 GET http://localhost:8080/films
 Accept: application/json
@@ -42,3 +44,79 @@ DELETE http://localhost:8080/films/1
 ### Identifiant inconnu — réponse attendue : 404 au format ProblemDetail
 GET http://localhost:8080/films/9999
 Accept: application/json
+
+
+### ================= ACTEURS =================
+
+### Liste des acteurs
+GET http://localhost:8080/acteurs
+Accept: application/json
+
+### Création d'acteur — réponse attendue : 201 Created
+POST http://localhost:8080/acteurs
+Content-Type: application/json
+
+{
+  "nom": "Ford",
+  "prenom": "Harrison"
+}
+
+### Création d'un 2ème acteur
+POST http://localhost:8080/acteurs
+Content-Type: application/json
+
+{
+  "nom": "Gosling",
+  "prenom": "Ryan"
+}
+
+### Création d'acteur invalide — réponse attendue : 400 au format ProblemDetail
+POST http://localhost:8080/acteurs
+Content-Type: application/json
+
+{
+  "nom": "Ford"
+}
+
+### Acteur par son identifiant
+GET http://localhost:8080/acteurs/1
+Accept: application/json
+
+### Acteur inconnu — réponse attendue : 404 au format ProblemDetail
+GET http://localhost:8080/acteurs/9999
+Accept: application/json
+
+### Mise à jour d'acteur
+PUT http://localhost:8080/acteurs/1
+Content-Type: application/json
+
+{
+  "nom": "Ford",
+  "prenom": "Harrison (Update)"
+}
+
+### Suppression d'acteur — réponse attendue : 204 No Content
+DELETE http://localhost:8080/acteurs/2
+
+
+### ================= ASSOCIATIONS =================
+
+### Ajouter l'acteur 1 au film 1 — réponse attendue : 204 No Content
+POST http://localhost:8080/films/1/acteurs/1
+
+### Ajouter un acteur inconnu au film 1 — réponse attendue : 404 au format ProblemDetail
+POST http://localhost:8080/films/1/acteurs/9999
+
+### Ajouter l'acteur 1 à un film inconnu — réponse attendue : 404 au format ProblemDetail
+POST http://localhost:8080/films/9999/acteurs/1
+
+### Acteurs du film identifié par son identifiant
+GET http://localhost:8080/films/1/acteurs
+Accept: application/json
+
+### Films de l'acteur identifié par son identifiant
+GET http://localhost:8080/acteurs/1/films
+Accept: application/json
+
+### Retirer l'acteur 1 du film 1 — réponse attendue : 204 No Content
+DELETE http://localhost:8080/films/1/acteurs/1
