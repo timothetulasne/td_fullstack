@@ -1,1 +1,5 @@
-<p>film-list works!</p>
+@for (film of films(); track film.id) {
+  <div>
+    <a [routerLink]="['/films', film.id]">{{ film.titre }}</a>
+  </div>
+}
