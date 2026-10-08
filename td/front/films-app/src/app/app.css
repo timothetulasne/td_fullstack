@@ -1,0 +1,35 @@
+/* Style du bandeau de navigation */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #ffffff;
+  padding: 14px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Style des liens */
+nav a {
+  text-decoration: none;
+  color: #4b5563;
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+/* Effet au survol */
+nav a:hover {
+  color: #111827;
+  background-color: #f3f4f6;
+}
+
+/* Style pour l'onglet actif (quand la route correspond) */
+nav a.actif {
+  color: #8b5cf6;            /* Couleur d'accentuation (violet) */
+  background-color: #f5f3ff; /* Fond léger assorti */
+  font-weight: 700;
+}

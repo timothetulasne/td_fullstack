@@ -1,16 +1,24 @@
-import { Component, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, inject, signal } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { catchError, of } from 'rxjs';
 import { FilmService } from '../film-service';
 
 @Component({
-  imports: [RouterLink],
   selector: 'app-film-list',
-  styleUrl: './film-list.css',
+  imports: [AsyncPipe, RouterLink],
   templateUrl: './film-list.html',
+  styleUrl: './film-list.css'
 })
 export class FilmList {
-  private readonly filmService = inject(FilmService);
+  private filmService = inject(FilmService);
 
-  readonly films = toSignal(this.filmService.getAll(), { initialValue: [] });
+  erreur = signal<string | null>(null);
+
+  films$ = this.filmService.getAll().pipe(
+    catchError(() => {
+      this.erreur.set('Serveur pas joignable');
+      return of([]);
+    })
+  );
 }

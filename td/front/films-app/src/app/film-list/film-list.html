@@ -1,5 +1,13 @@
-@for (film of films(); track film.id) {
-  <div>
-    <a [routerLink]="['/films', film.id]">{{ film.titre }}</a>
+@if (erreur()) {
+  <p class="message-erreur">{{ erreur() }}</p>
+} @else if (films$ | async; as films) {
+  <div class="films-container">
+    @for (film of films; track film.id) {
+      <a class="film-item" [routerLink]="['/films', film.id]">
+        {{ film.titre }}
+      </a>
+    } @empty {
+      <p class="message-vide">Aucun film disponible</p>
+    }
   </div>
 }

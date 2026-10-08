@@ -1,23 +1,28 @@
-@if (film(); as currentFilm) {
+@if (erreur()) {
+  <div class="message-erreur">
+    <p>{{ erreur() }}</p>
+    <a routerLink="/films">Retour à la liste</a>
+  </div>
+} @else if (film(); as currentFilm) {
   <div class="detail-card">
     <a routerLink="/films">Retour</a>
     <div class="detail-body">
-      <div>
-        <h1>{{ currentFilm.titre }} ({{ currentFilm.dateSortie }})</h1>
-        <p><strong>Réalisateur :</strong> {{ currentFilm.realisateur }}</p>
-        <p><strong>Genre :</strong> {{ currentFilm.genre }}</p>
+      <h1>{{ currentFilm.titre }} ({{ currentFilm.dateSortie }})</h1>
+      <p><strong>Réalisateur :</strong> {{ currentFilm.realisateur }}</p>
+      <p><strong>Genre :</strong> {{ currentFilm.genre }}</p>
 
-        <h3>Acteurs principaux</h3>
-        <ul>
-          @for (acteur of currentFilm.acteurs; track acteur.id) {
-            <li>
-              <a [routerLink]="['/acteurs', acteur.id]">{{ acteur.nom }}</a>
-            </li>
-          }
-        </ul>
-      </div>
+      <h3>Acteurs principaux</h3>
+      <ul>
+        @for (acteur of currentFilm.acteurs; track acteur.id) {
+          <li>
+            <a [routerLink]="['/acteurs', acteur.id]">{{ acteur.nom }}</a>
+          </li>
+        } @empty {
+          <li>Aucun acteur répertorié</li>
+        }
+      </ul>
     </div>
   </div>
 } @else {
-  <p>Film introuvable. <a routerLink="/films">Retour à la liste</a></p>
+  <p>Chargement des détails</p>
 }

@@ -1,30 +1,33 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
+import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
+import { catchError, of, switchMap } from 'rxjs';
 import { FilmService } from '../film-service';
-import { Film } from '../film.model';
 
 @Component({
-  imports: [RouterLink],
   selector: 'app-film-detail',
-  styleUrl: './film-detail.css',
+  imports: [RouterLink],
   templateUrl: './film-detail.html',
+  styleUrl: './film-detail.css'
 })
-export class FilmDetail implements OnInit {
-  private readonly filmService = inject(FilmService);
+export class FilmDetail {
+  private filmService = inject(FilmService);
 
-  readonly id = input.required<string>();
-  readonly film = signal<Film | null>(null);
-  readonly erreur = signal<string | null>(null);
+  id = input.required<string>();
 
-  ngOnInit() {
-    this.recharger();
-  }
+  erreur = signal<string | null>(null);
 
-  recharger() {
-    const filmId = Number(this.id());
-    this.filmService.getFilmById(filmId).subscribe({
-      next: (f) => this.film.set(f),
-      error: () => this.erreur.set('Impossible de charger le film.')
-    });
-  }
+  film = toSignal( // convertit en signal le resultat de ce qu'il y a dedans, donc l'observable
+    toObservable(this.id).pipe( // id devient un Observable et quand id change, id emet une nvl valeur 
+      switchMap(filmId => { // detecte le chgmt de l'id et lance nvl requette http
+        this.erreur.set(null);
+        return this.filmService.getFilmById(Number(filmId)).pipe(
+          catchError(() => {
+            this.erreur.set('Impossible de charger les détails');
+            return of(null);
+          })
+        );
+      })
+    )
+  );
 }
