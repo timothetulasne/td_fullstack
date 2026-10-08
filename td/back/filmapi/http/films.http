@@ -66,8 +66,8 @@ POST http://localhost:8080/acteurs
 Content-Type: application/json
 
 {
-  "nom": "Gosling",
-  "prenom": "Ryan"
+  "nom": "Hanks",
+  "prenom": "Tom"
 }
 
 ### Création d'acteur invalide — réponse attendue : 400 au format ProblemDetail

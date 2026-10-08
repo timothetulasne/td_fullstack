@@ -7,7 +7,7 @@
   <div class="detail-card">
     <a routerLink="/films">Retour</a>
     <div class="detail-body">
-      <h1>{{ currentFilm.titre }} ({{ currentFilm.dateSortie }})</h1>
+      <h1>{{ currentFilm.titre | uppercase }} ({{ currentFilm.dateSortie | date:"dd/M/yyyy" }})</h1>
       <p><strong>Réalisateur :</strong> {{ currentFilm.realisateur }}</p>
       <p><strong>Genre :</strong> {{ currentFilm.genre }}</p>
 
@@ -15,7 +15,7 @@
       <ul>
         @for (acteur of currentFilm.acteurs; track acteur.id) {
           <li>
-            <a [routerLink]="['/acteurs', acteur.id]">{{ acteur.nom }}</a>
+            <a [routerLink]="['/acteurs', acteur.id]">{{ acteur.prenom }}{{ acteur.nom }}</a>
           </li>
         } @empty {
           <li>Aucun acteur répertorié</li>

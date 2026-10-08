@@ -3,10 +3,11 @@ import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { catchError, of, switchMap } from 'rxjs';
 import { FilmService } from '../film-service';
+import { DatePipe, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-film-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, DatePipe, UpperCasePipe],
   templateUrl: './film-detail.html',
   styleUrl: './film-detail.css'
 })

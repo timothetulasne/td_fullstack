@@ -3,9 +3,10 @@
 } @else if (films$ | async; as films) {
   <div class="films-container">
     @for (film of films; track film.id) {
-      <a class="film-item" [routerLink]="['/films', film.id]">
-        {{ film.titre }}
-      </a>
+        <a class="film-item" [class.ancien]="estAncien(film)" [routerLink]="['/films', film.id]">
+          {{ film.titre }} ({{ film.dateSortie | date:"yyyy" }})
+        </a>
+      
     } @empty {
       <p class="message-vide">Aucun film disponible</p>
     }

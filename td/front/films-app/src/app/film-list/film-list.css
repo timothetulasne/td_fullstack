@@ -30,3 +30,7 @@
   border-color: #8b5cf6; /* Couleur d'accentuation (violet comme le contour de votre maquette) */
   color: #8b5cf6;
 }
+
+.ancien {
+  color: red;
+}
