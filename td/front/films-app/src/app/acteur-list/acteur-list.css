@@ -1,0 +1,66 @@
+/* Container de la liste des acteurs */
+.acteurs-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes de largeur égale */
+  gap: 24px;                             /* Espace entre les éléments */
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Style de chaque élément/lien de acteur */
+.acteur-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #1a1a1a;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.acteur-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #8b5cf6; /* Couleur d'accentuation (violet comme le contour de votre maquette) */
+  color: #8b5cf6;
+}
+
+.ancien {
+  color: red;
+}
+
+.acteur-actions {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;     /* Centre verticalement si le conteneur a une hauteur */
+  width: 100%;             /* S'assure de prendre toute la largeur disponible */
+  margin: 2rem 0;          /* Espace au-dessus et en-dessous */
+}
+
+.acteur-actions a {
+  display: inline-flex;    /* Utiliser inline-flex (et non justify-center) */
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.acteur-actions a:hover {
+  background-color: #e5e7eb;
+  color: #111827;
+}
