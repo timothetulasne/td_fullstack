@@ -1,0 +1,128 @@
+/* Container principal du formulaire */
+form {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #333333;
+}
+
+/* Groupe de champs de saisie */
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* Labels des champs */
+form label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+/* Champs texte, date et select */
+form input[type="text"],
+form input[type="date"],
+form select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #111827;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+/* Effets au survol et au focus sur les champs */
+form input[type="text"]:hover,
+form input[type="date"]:hover,
+form select:hover {
+  border-color: #9ca3af;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Style spécifique pour la validation Angular (champs invalides une fois touchés/modifiés) */
+form input.ng-invalid.ng-touched,
+form select.ng-invalid.ng-touched {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+form input.ng-invalid.ng-touched:focus,
+form select.ng-invalid.ng-touched:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+/* Bouton d'enregistrement */
+form button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #ffffff;
+  background-color: #6366f1;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+form button[type="submit"]:hover {
+  background-color: #4f46e5;
+}
+
+form button[type="submit"]:active {
+  transform: scale(0.99);
+}
+
+/* Style du bloc d'erreur au-dessus du formulaire */
+.message-erreur {
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 16px 20px;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  color: #991b1b;
+  font-family: system-ui, -apple-system, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.message-erreur p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.message-erreur a[routerLink] {
+  color: #dc2626;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.message-erreur a[routerLink]:hover {
+  text-decoration: underline;
+}
