@@ -24,4 +24,6 @@ export class FilmService {
   createFilm(film: Partial<Film>): Observable<Film> {
     return this.http.post<Film>(this.url, film);
   }
+
+  
 }

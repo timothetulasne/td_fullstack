@@ -1,1 +1,16 @@
-<p>acteur-list works!</p>
+@if (erreur()) {
+  <p class="message-erreur">{{ erreur() }}</p>
+} @else if (acteurs$ | async; as acteurs) {
+  <div class="films-container">
+    @for (acteur of acteurs; track acteur.id) {
+        <a class="film-item" [routerLink]="['/acteurs', acteur.id]">
+          {{ acteur.prenom }} ({{ acteur.nom }})
+        </a>
+      
+    } @empty {
+      <p class="message-vide">Aucun acteur connu</p>
+    }
+  </div>
+  <div class="film-actions">
+  </div>
+}
