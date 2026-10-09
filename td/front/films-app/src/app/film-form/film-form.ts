@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Film } from '../film.model';
 import { FilmService } from '../film-service';
@@ -13,16 +13,16 @@ import { catchError, of, switchMap } from 'rxjs';
   styleUrl: './film-form.css',
   templateUrl: './film-form.html',
 })
-export class FilmForm {
+export class FilmForm implements OnInit{
   private filmService = inject(FilmService);
   private router = inject(Router);
 
-  film: Partial<Film> = {
+  film = signal<Partial<Film>>({
     titre: '',
     realisateur: '',
     dateSortie: '',
     genre: ''
-  };
+  });
 
   id = input<string>();
 
@@ -30,30 +30,44 @@ export class FilmForm {
 
   currentUrl = this.router.url;
 
-  film$ = toSignal( // convertit en signal le resultat de ce qu'il y a dedans, donc l'observable
-    toObservable(this.id).pipe( // id devient un Observable et quand id change, id emet une nvl valeur 
-      switchMap(filmId => { // detecte le chgmt de l'id et lance nvl requette http
-        this.erreur.set(null);
-        return this.filmService.getFilmById(Number(filmId)).pipe(
-          catchError(() => {
-            this.erreur.set('Impossible de charger les détails');
-            return of(null);
-          })
-        );
-      })
-    )
-  );
+  ngOnInit(): void {
+    const filmId = this.id();
+    if (filmId) {
+      this.filmService.getFilmById(Number(filmId)).subscribe({
+        next: (value) => {
+          this.film.set(value);
+        },
+      });
+    }
+    
+  }
 
+  sauvegarder(): void {
+    if (this.id()) {
+      this.modifier();
+    } else {
+      this.creer();
+    }
+  }
 
-  enregistrer() {
-    this.filmService.createFilm(this.film).subscribe({
-      next: (filmCree) => {
-        console.log('Film bien créé :', filmCree);
+  modifier() {
+    const filmId = Number(this.id());
+    if (!filmId) return;
+
+    this.filmService.updateFilmById(filmId, this.film()).subscribe({
+      next: () => {
         this.router.navigate(['/films']);
-      },
-      error: (err) => {
-        console.error('Erreur création du film :', err);
       }
     });
   }
+
+  creer() {
+    this.filmService.createFilm(this.film()).subscribe({
+      next: (filmCree) => {
+        this.router.navigate(['/films']);
+      }
+    });
+  }
+
+  
 }

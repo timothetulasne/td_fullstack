@@ -3,86 +3,37 @@
         <p>{{ erreur() }}</p>
         <a [routerLink]="['/films']">Retour aux films</a>
     </div>
-} @else if (film$(); as currentFilm) {
-    <form #f="ngForm" (ngSubmit)="enregistrer()">
+}
+
+    <form #f="ngForm" (ngSubmit)="sauvegarder()">
         <div>
             <label for="titre">Titre :</label>
-            <input id="titre" name="titre" type="text" #titre="ngModel" [(ngModel)]="film.titre" placeholder="{{ currentFilm.titre }}" required />
-            @if (titre.invalid) {
-                <small>Titre requis, 2 caractères minimum</small>
-            }
+            <input id="titre" name="titre" type="text" #titre="ngModel" [(ngModel)]="film().titre" required />
         </div>
 
         <div>
             <label for="realisateur">Réalisateur :</label>
-            <input id="realisateur" name="realisateur" type="text" #realisateur="ngModel" [(ngModel)]="film.realisateur" placeholder="{{ currentFilm.realisateur }}" required />
+            <input id="realisateur" name="realisateur" type="text" #realisateur="ngModel" [(ngModel)]="film().realisateur" required />
         </div>
 
         <div>
             <label for="dateSortie">Date de sortie :</label>
-            <input id="dateSortie" name="dateSortie" type="date" #dateSortie="ngModel" [(ngModel)]="film.dateSortie" placeholder="{{ currentFilm.dateSortie }}" required />
+            <input id="dateSortie" name="dateSortie" type="date" #dateSortie="ngModel" [(ngModel)]="film().dateSortie" required />
         </div>
 
         <div>
             <label for="genre">Genre :</label>
-            <select id="genre" name="genre" #genre="ngModel" [(ngModel)]="film.genre" required>
-                @switch (currentFilm.genre) {
-                    @case ("SCIENCE_FICTION") {
-                        <option value="SCIENCE_FICTION" selected>Science fiction</option>
-                        <option value="ACTION">Action</option>
-                        <option value="THRILLER">Thriller</option>
-                        <option value="ROMANCE">Romance</option>
-                        <option value="DRAME">Drame</option>
-                        <option value="COMEDIE">Comédie</option>
-                    }
-                    @case ("ACTION") {
-                        <option value="SCIENCE_FICTION">Science fiction</option>
-                        <option value="ACTION" selected>Action</option>
-                        <option value="THRILLER">Thriller</option>
-                        <option value="ROMANCE">Romance</option>
-                        <option value="DRAME">Drame</option>
-                        <option value="COMEDIE">Comédie</option>
-                    }
-                    @case ("THRILLER") {
-                        <option value="SCIENCE_FICTION">Science fiction</option>
-                        <option value="ACTION">Action</option>
-                        <option value="THRILLER" selected>Thriller</option>
-                        <option value="ROMANCE">Romance</option>
-                        <option value="DRAME">Drame</option>
-                        <option value="COMEDIE">Comédie</option>
-                    }
-                    @case ("ROMANCE") {
-                        <option value="SCIENCE_FICTION">Science fiction</option>
-                        <option value="ACTION">Action</option>
-                        <option value="THRILLER">Thriller</option>
-                        <option value="ROMANCE" selected>Romance</option>
-                        <option value="DRAME">Drame</option>
-                        <option value="COMEDIE">Comédie</option>
-                    }
-                    @case ("DRAME") {
-                        <option value="SCIENCE_FICTION">Science fiction</option>
-                        <option value="ACTION">Action</option>
-                        <option value="THRILLER">Thriller</option>
-                        <option value="ROMANCE">Romance</option>
-                        <option value="DRAME" selected>Drame</option>
-                        <option value="COMEDIE">Comédie</option>
-                    }
-                    @case ("COMEDIE") {
+            <select id="genre" name="genre" #genre="ngModel" [(ngModel)]="film().genre" required>
                         <option value="SCIENCE_FICTION">Science fiction</option>
                         <option value="ACTION">Action</option>
                         <option value="THRILLER">Thriller</option>
                         <option value="ROMANCE">Romance</option>
                         <option value="DRAME">Drame</option>
                         <option value="COMEDIE" selected>Comédie</option>
-                    }
-                } 
                 
                 
             </select>
         </div>
 
-        <button type="submit" [disabled]="f.invalid">Enregistrer</button>
+        <button type="submit">Enregistrer</button>
     </form>
-} @else {
-    <p>Injection des données</p>
-}

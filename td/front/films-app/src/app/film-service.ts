@@ -25,5 +25,8 @@ export class FilmService {
     return this.http.post<Film>(this.url, film);
   }
 
+  updateFilmById(id: number, film: Partial<Film>): Observable<Film> {
+    return this.http.put<Film>(`${this.url}/${id}`, film);
+  }
   
 }
