@@ -3,26 +3,25 @@
     <p>{{ erreur() }}</p>
     <a routerLink="/acteurs">Retour à la liste</a>
   </div>
-} @else if (acteur(); as currentActeur) {
+} @else if (donnees(); as data) {
   <div class="detail-card">
     <a routerLink="/acteurs">Retour</a>
     <div class="detail-body">
-      <h1>{{ currentActeur.prenom }} {{ currentActeur.nom }}</h1>
+      <h1>{{ data.acteur.prenom }} {{ data.acteur.nom }}</h1>
 
       <h3>Films principaux</h3>
       <ul>
-        @for (film of currentActeur.films; track film.id) {
+        @for (film of data.films; track film.id) {
           <li>
             <a [routerLink]="['/films', film.id]">{{ film.titre }}</a>
           </li>
         } @empty {
-          Aucun film répertorié
+          <li>Aucun film répertorié</li>
         }
       </ul>
     </div>
-    <div class="detail-actions">
-    </div>
+    <div class="detail-actions"></div>
   </div>
 } @else {
-  <p>Chargement des détails</p>
+  <p>Chargement des détails...</p>
 }

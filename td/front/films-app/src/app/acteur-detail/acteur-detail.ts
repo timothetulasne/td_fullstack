@@ -1,6 +1,6 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { catchError, of, switchMap } from 'rxjs';
+import { catchError, forkJoin, of, switchMap } from 'rxjs';
 import { ActeurService } from '../acteur-service';
 import { RouterLink } from '@angular/router';
 
@@ -18,11 +18,16 @@ export class ActeurDetail {
 
   erreur = signal<string | null>(null);
   
-  acteur = toSignal( // convertit en signal le resultat de ce qu'il y a dedans, donc l'observable
-    toObservable(this.id).pipe( // id devient un Observable et quand id change, id emet une nvl valeur 
-      switchMap(acteurId => { // detecte le chgmt de l'id et lance nvl requette http
+  donnees = toSignal(
+    toObservable(this.id).pipe(
+      switchMap(acteurId => {
         this.erreur.set(null);
-        return this.acteurService.getActeurById(Number(acteurId)).pipe(
+        const numericId = Number(acteurId);
+
+        return forkJoin({ // permet d'avoir deux informations dans un signal
+          acteur: this.acteurService.getActeurById(numericId),
+          films: this.acteurService.getFilmByActeurId(numericId)
+        }).pipe(
           catchError(() => {
             this.erreur.set('Impossible de charger les détails');
             return of(null);
