@@ -16,4 +16,8 @@ export class FilmService {
   getFilmById(id: number): Observable<Film> {
     return this.http.get<Film>(`${this.url}/${id}`);
   }
+
+  deleteFilmById(id: number) {
+    return this.http.delete<void>(`${this.url}/${id}`);
+  }
 }

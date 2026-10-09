@@ -1,1 +1,33 @@
-<p>film-form works!</p>
+<form #f="ngForm" (ngSubmit)="enregistrer()">
+  <div>
+    <label for="titre">Titre :</label>
+    <input id="titre" name="titre" type="text" #titre="ngModel" [(ngModel)]="film.titre" required />
+    @if (titre.invalid) {
+        <small>Titre requis, 2 caractères minimum</small>
+    }
+  </div>
+
+  <div>
+    <label for="realisateur">Réalisateur :</label>
+    <input id="realisateur" name="realisateur" type="text" [(ngModel)]="film.realisateur" required />
+  </div>
+
+  <div>
+    <label for="dateSortie">Date de sortie :</label>
+    <input id="dateSortie" name="dateSortie" type="date" [(ngModel)]="film.dateSortie" required />
+  </div>
+
+  <div>
+    <label for="genre">Genre :</label>
+    <select id="genre" name="genre" [(ngModel)]="film.genre" required>
+        <option value="SCIENCE_FICTION">Science fiction</option>
+        <option value="ACTION">Action</option>
+        <option value="THRILLER">Thriller</option>
+        <option value="ROMANCE">Romance</option>
+        <option value="DRAME">Drame</option>
+        <option value="COMEDIE">Comédie</option>
+    </select>
+  </div>
+
+    <button type="submit" [disabled]="f.invalid">Enregistrer</button>
+</form>

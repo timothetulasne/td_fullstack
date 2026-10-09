@@ -1,6 +1,6 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { catchError, of, switchMap } from 'rxjs';
 import { FilmService } from '../film-service';
 import { DatePipe, UpperCasePipe } from '@angular/common';
@@ -13,6 +13,7 @@ import { DatePipe, UpperCasePipe } from '@angular/common';
 })
 export class FilmDetail {
   private filmService = inject(FilmService);
+  private router= inject(Router);
 
   id = input.required<string>();
 
@@ -31,4 +32,13 @@ export class FilmDetail {
       })
     )
   );
+
+  supprimerFilm() {
+    if (confirm('Vraiment ?')) {
+      this.filmService.deleteFilmById(Number(this.id())).subscribe({
+        next: () => this.router.navigate(['/films']),
+        error: () => this.erreur.set('Erreur lors de la suppression')
+      });
+    }
+  }
 }

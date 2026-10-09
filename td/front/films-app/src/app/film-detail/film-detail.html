@@ -22,6 +22,10 @@
         }
       </ul>
     </div>
+    <div class="detail-actions">
+      <a [routerLink]="['/films', id(), 'modifier']">Modifier</a>
+      <button (click)="supprimerFilm()">Supprimer</button>
+    </div>
   </div>
 } @else {
   <p>Chargement des détails</p>
