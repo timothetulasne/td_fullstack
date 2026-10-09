@@ -15,7 +15,7 @@
       <ul>
         @for (acteur of currentFilm.acteurs; track acteur.id) {
           <li>
-            <a [routerLink]="['/acteurs', acteur.id]">{{ acteur.prenom }}{{ acteur.nom }}</a>
+            <a [routerLink]="['/acteurs', acteur.id]">{{ acteur.prenom }} {{ acteur.nom }}</a>
           </li>
         } @empty {
           <li>Aucun acteur répertorié</li>

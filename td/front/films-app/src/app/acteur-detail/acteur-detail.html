@@ -1,1 +1,28 @@
-<p>acteur-detail works!</p>
+@if (erreur()) {
+  <div class="message-erreur">
+    <p>{{ erreur() }}</p>
+    <a routerLink="/acteurs">Retour à la liste</a>
+  </div>
+} @else if (acteur(); as currentActeur) {
+  <div class="detail-card">
+    <a routerLink="/acteurs">Retour</a>
+    <div class="detail-body">
+      <h1>{{ currentActeur.prenom }} {{ currentActeur.nom }}</h1>
+
+      <h3>Films principaux</h3>
+      <ul>
+        @for (film of currentActeur.films; track film.id) {
+          <li>
+            <a [routerLink]="['/films', film.id]">{{ film.titre }}</a>
+          </li>
+        } @empty {
+          Aucun film répertorié
+        }
+      </ul>
+    </div>
+    <div class="detail-actions">
+    </div>
+  </div>
+} @else {
+  <p>Chargement des détails</p>
+}

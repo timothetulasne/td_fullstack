@@ -1,0 +1,127 @@
+/* Card principale pour la fiche du film */
+.detail-card {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #333333;
+}
+
+/* Bouton / Lien de retour */
+.detail-card > a[routerLink] {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.detail-card > a[routerLink]:hover {
+  text-decoration: underline;
+  color: #4f46e5;
+}
+
+/* Titre principal du film */
+.detail-body h1 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.8rem;
+  color: #111827;
+}
+
+/* Paragraphes d'informations */
+.detail-body p {
+  margin: 8px 0;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.detail-body strong {
+  color: #4b5563;
+}
+
+/* Section des acteurs */
+.detail-body h3 {
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  border-bottom: 2px solid #f3f4f6;
+  padding-bottom: 6px;
+}
+
+/* Liste des acteurs */
+.detail-body ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.detail-body li {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.detail-body li a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.detail-body li a:hover {
+  text-decoration: underline;
+}
+
+/* Container des boutons d'action */
+.detail-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+/* Style de base identique pour le bouton et le lien */
+.detail-actions a,
+.detail-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+/* Lien "Modifier" (style neutre / primaire) */
+.detail-actions a {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.detail-actions a:hover {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+/* Bouton "Supprimer" (style danger / rouge) */
+.detail-actions button {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.detail-actions button:hover {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
