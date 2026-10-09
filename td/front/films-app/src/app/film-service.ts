@@ -20,4 +20,8 @@ export class FilmService {
   deleteFilmById(id: number) {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
+
+  createFilm(film: Partial<Film>): Observable<Film> {
+    return this.http.post<Film>(this.url, film);
+  }
 }

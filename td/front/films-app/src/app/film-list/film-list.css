@@ -34,3 +34,33 @@
 .ancien {
   color: red;
 }
+
+.film-actions {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;     /* Centre verticalement si le conteneur a une hauteur */
+  width: 100%;             /* S'assure de prendre toute la largeur disponible */
+  margin: 2rem 0;          /* Espace au-dessus et en-dessous */
+}
+
+.film-actions a {
+  display: inline-flex;    /* Utiliser inline-flex (et non justify-center) */
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.film-actions a:hover {
+  background-color: #e5e7eb;
+  color: #111827;
+}

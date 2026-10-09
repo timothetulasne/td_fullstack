@@ -9,17 +9,17 @@
 
   <div>
     <label for="realisateur">Réalisateur :</label>
-    <input id="realisateur" name="realisateur" type="text" [(ngModel)]="film.realisateur" required />
+    <input id="realisateur" name="realisateur" type="text" #realisateur="ngModel" [(ngModel)]="film.realisateur" required />
   </div>
 
   <div>
     <label for="dateSortie">Date de sortie :</label>
-    <input id="dateSortie" name="dateSortie" type="date" [(ngModel)]="film.dateSortie" required />
+    <input id="dateSortie" name="dateSortie" type="date" #dateSortie="ngModel" [(ngModel)]="film.dateSortie" required />
   </div>
 
   <div>
     <label for="genre">Genre :</label>
-    <select id="genre" name="genre" [(ngModel)]="film.genre" required>
+    <select id="genre" name="genre" #genre="ngModel" [(ngModel)]="film.genre" required>
         <option value="SCIENCE_FICTION">Science fiction</option>
         <option value="ACTION">Action</option>
         <option value="THRILLER">Thriller</option>
